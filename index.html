@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Learn VueJS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css">
+    <style media="screen">
+      body {
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+      .title-blue {
+        color: blue;
+      }
+      .is-loading {
+        background: red;
+      }
+
+      .wrapper {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 10px;
+      }
+      .wrapper > div {
+        background: #eee;
+        padding: 1em;
+      }
+      .wrapper > div:nth-child(odd) {
+        background: #ddd;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="container wrapper">
+
+        <div>
+          <h3 :class="className" class="title is-4">Vue Event Listeners </h3>
+          <ul>
+            <li v-for="name in names">{{name}}</li>
+          </ul>
+          <input type="text" v-model="newName" @keyup.enter="addName" placeholder="Enter new name">
+          <button type="button" @click="addName" :title="btnTitle">Add Name</button>
+        </div>
+
+        <div>
+          <h3 class="title is-4">Class Binding</h3>
+          <button type="button" @click="toggleColour" :class="{ 'is-loading': isLoading }">Toggle Colour</button>
+        </div>
+
+        <div>
+          <h3 class="title is-4">Attribute Binding</h3>
+          <button type="button" @click="disableBtn" :disabled="isDisabled">Disable Button</button>
+        </div>
+
+        <div>
+          <h3 class="title is-4">Computed Properties</h3>
+          <p>Message: {{ message }}</p>
+          <p>Reversed: {{ reversedMessage }}</p>
+        </div>
+
+        <div>
+          <h3 class="title is-4">Completed Tasks</h3>
+          <ul>
+            <li v-for="task in tasks" v-if="task.completed">{{ task.description }}  <button type="button" @click="inCompleteTask(task)">incomplete</button></li>
+          </ul>
+
+          <h3 class="title is-4">Incomplete Tasks</h3>
+          <ul>
+            <li v-for="task in incompleteTasks">{{ task.description }} <button type="button" @click="completeTask(task)">complete</button></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="title is-4">Components 101</h3>
+          <ul>
+            <task>Goto the bank</task>
+            <task>Goto the cinema</task>
+            <task>Goto the shop</task>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="title is-4">Components within Component</h3>
+          <task-list></task-list>
+        </div>
+
+        <div>
+          <h3 class="title is-4">Message Component</h3>
+          <message title="Hello World">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </message>
+        </div>
+
+        <div>
+          <h3 class="title is-4">Modal Component</h3>
+          <modal v-if="showModal" @close="showModal = false">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </modal>
+          <button type="button" @click="showModal = true">Show Modal</button>
+        </div>
+
+        <div>
+          <h3 class="title is-4">Tabs Component</h3>
+        </div>
+
+      </div><!--  end of .wrapper -->
+    </div><!--  end of #app -->
+    <script src="./index.js"></script>
+  </body>
+</html>
